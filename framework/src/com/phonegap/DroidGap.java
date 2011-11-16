@@ -73,7 +73,7 @@ import com.phonegap.api.LOG;
 import com.phonegap.api.PhonegapActivity;
 import com.phonegap.api.IPlugin;
 import com.phonegap.api.PluginManager;
-import 	org.xmlpull.v1.XmlPullParserException;
+import        org.xmlpull.v1.XmlPullParserException;
 
 /**
  * This class is the main Android activity that represents the PhoneGap
@@ -1084,6 +1084,11 @@ public class DroidGap extends PhonegapActivity {
         @Override
         public boolean onJsPrompt(WebView view, String url, String message, String defaultValue, JsPromptResult result) {
             
+            if (url.equals("about:blank")) {
+                result.cancel();
+                return true;
+            }
+
             // Security check to make sure any requests are coming from the page initially
             // loaded in webview and not another loaded in an iframe.
             boolean reqOk = false;
